@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seaweed Farmer — Start Your Ocean Farm</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --sage: #b5be7b;
+      --sage-dark: #8a9455;
+      --sage-light: #c8cf9a;
+      --ocean: #1a5c5e;
+      --ocean-light: #237678;
+      --cream: #f4f2ea;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(181, 190, 123, 0.95);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      text-decoration: none;
+      font-style: italic;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s;
+    }
+
+    .nav-links a:hover { opacity: 0.7; }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-outline {
+      background: var(--sage-light);
+      color: var(--text-dark);
+      border: 2px solid var(--text-dark);
+    }
+
+    .btn-outline:hover {
+      background: var(--text-dark);
+      color: var(--white);
+    }
+
+    .btn-primary {
+      background: var(--ocean);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--ocean-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26, 92, 94, 0.3);
+    }
+
+    .btn-white {
+      background: var(--white);
+      color: var(--ocean);
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--sage);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 1;
+      color: var(--white);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--text-dark);
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-image {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-arrows {
+      position: absolute;
+      bottom: 3rem;
+      left: 3rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .arrow-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--sage-light);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+    }
+
+    .arrow-btn:hover {
+      background: var(--white);
+      transform: scale(1.1);
+    }
+
+    /* BENEFITS */
+    .benefits {
+      padding: 7rem 3rem;
+      background: var(--cream);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--sage-dark);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      color: #666;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .benefit-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+
+    .benefit-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--sage);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .benefit-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .benefit-card p {
+      color: #666;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* HOW IT WORKS */
+    .how-it-works {
+      padding: 7rem 3rem;
+      background: var(--ocean);
+      color: var(--white);
+    }
+
+    .how-it-works .section-label { color: var(--sage-light); }
+    .how-it-works .section-header h2 { color: var(--white); }
+    .how-it-works .section-header p { color: rgba(255,255,255,0.7); }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .step {
+      text-align: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--sage);
+      color: var(--text-dark);
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+
+    .step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    /* STATS */
+    .stats {
+      padding: 5rem 3rem;
+      background: var(--sage);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stat h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 900;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat p {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 7rem 3rem;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta p {
+      color: #666;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 550px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--text-dark);
+      color: rgba(255,255,255,0.6);
+      padding: 3rem;
+      text-align: center;
+    }
+
+    footer .logo { color: var(--white); }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-copy { font-size: 0.8rem; }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero-text h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+
+      .benefits { padding: 4rem 1.5rem; }
+      .benefits-grid { grid-template-columns: 1fr; max-width: 500px; }
+
+      .how-it-works { padding: 4rem 1.5rem; }
+      .steps-grid { grid-template-columns: 1fr 1fr; }
+
+      .stats { padding: 3rem 1.5rem; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+      .cta { padding: 4rem 1.5rem; }
+    }
+
+    @media (max-width: 500px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Seaweed Farmer</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#start">Get Started</a></li>
+      </ul>
+      <a href="#start" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1530053969600-caed2596d242?w=900&q=80" alt="Seaweed growing in clear ocean water">
+      </div>
+      <div class="hero-text">
+        <h1>Grow the Ocean's Future</h1>
+        <p>Seaweed farming is the fastest-growing sector in aquaculture. Low cost, zero freshwater, zero fertilizer — and a massive positive impact on the planet. Start your ocean farm today.</p>
+        <a href="#how" class="btn btn-primary">Learn How to Start</a>
+      </div>
+    </div>
+    <div class="hero-arrows">
+      <button class="arrow-btn" aria-label="Previous">&larr;</button>
+      <button class="arrow-btn" aria-label="Next">&rarr;</button>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="benefits">
+    <div class="section-header">
+      <p class="section-label">Why Seaweed?</p>
+      <h2>A Crop That Gives Back</h2>
+      <p>Seaweed farming requires no land, no freshwater, and no fertilizer — yet delivers extraordinary environmental and economic returns.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🌊</div>
+        <h3>Carbon Capture</h3>
+        <p>Seaweed absorbs up to 20x more CO₂ per acre than forests, making it one of the most powerful tools against climate change.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">💧</div>
+        <h3>Zero Freshwater</h3>
+        <p>Unlike traditional agriculture, seaweed grows entirely in the ocean and requires no irrigation, preserving precious freshwater resources.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🐟</div>
+        <h3>Ocean Restoration</h3>
+        <p>Seaweed farms create vital habitats for marine life, reduce ocean acidification, and help restore degraded coastal ecosystems.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📈</div>
+        <h3>Growing Market</h3>
+        <p>The global seaweed market is projected to reach $30B+ by 2028, driven by demand in food, cosmetics, biofuels, and agriculture.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🌱</div>
+        <h3>Fast Growth Cycle</h3>
+        <p>Most seaweed species can be harvested in just 6–8 weeks, allowing multiple harvests per year and rapid return on investment.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🤝</div>
+        <h3>Community Impact</h3>
+        <p>Seaweed farming provides sustainable livelihoods for coastal communities, empowering small-scale farmers worldwide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works" id="how">
+    <div class="section-header">
+      <p class="section-label">Getting Started</p>
+      <h2>From Shore to Harvest</h2>
+      <p>Starting a seaweed farm is simpler than you think. Here's the path from idea to your first harvest.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Choose Your Site</h3>
+        <p>Identify a suitable coastal area with clean water, good current flow, and the right temperature range for your target species.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Select Your Species</h3>
+        <p>Pick from kelp, nori, wakame, or other varieties based on your climate, market demand, and farming goals.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Set Up Your Farm</h3>
+        <p>Install longlines, nets, or raft systems. Seed your lines with spores or cuttings and deploy them in the water.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Harvest & Sell</h3>
+        <p>Harvest in 6–8 weeks, then dry, process, or sell fresh to food producers, cosmetics companies, or biofuel manufacturers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat">
+        <h3>12M+</h3>
+        <p>Tonnes harvested yearly</p>
+      </div>
+      <div class="stat">
+        <h3>$30B</h3>
+        <p>Projected market by 2028</p>
+      </div>
+      <div class="stat">
+        <h3>50+</h3>
+        <p>Countries farming seaweed</p>
+      </div>
+      <div class="stat">
+        <h3>6 wks</h3>
+        <p>Average time to harvest</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="start">
+    <h2>Ready to Start Your Seaweed Farm?</h2>
+    <p>Join the growing community of ocean farmers building a sustainable future. We'll help you every step of the way.</p>
+    <div class="cta-buttons">
+      <a href="mailto:hello@seaweedfarmer.com" class="btn btn-primary">Get in Touch</a>
+      <a href="#how" class="btn btn-outline">Learn More</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="logo">Seaweed Farmer</a>
+    <ul class="footer-links">
+      <li><a href="#benefits">Benefits</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#start">Contact</a></li>
+    </ul>
+    <p class="footer-copy">&copy; 2026 Seaweed Farmer. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
