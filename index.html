@@ -19,12 +19,12 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --sage: #b5be7b;
-      --sage-dark: #8a9455;
-      --sage-light: #c8cf9a;
-      --ocean: #1a5c5e;
-      --ocean-light: #237678;
-      --cream: #f4f2ea;
+      --sage: #3d7a6e;
+      --sage-dark: #2c5e54;
+      --sage-light: #5a9e8f;
+      --ocean: #1a3c4e;
+      --ocean-light: #245468;
+      --cream: #f0f4f2;
       --white: #ffffff;
       --text-dark: #1a1a1a;
     }
@@ -49,7 +49,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.25rem 3rem;
-      background: rgba(181, 190, 123, 0.95);
+      background: rgba(61, 122, 110, 0.95);
       backdrop-filter: blur(8px);
     }
 
@@ -57,7 +57,7 @@
       font-family: 'Playfair Display', serif;
       font-weight: 900;
       font-size: 1.5rem;
-      color: var(--text-dark);
+      color: var(--white);
       text-decoration: none;
       font-style: italic;
     }
@@ -76,7 +76,7 @@
 
     .nav-links a {
       text-decoration: none;
-      color: var(--text-dark);
+      color: var(--white);
       font-weight: 500;
       font-size: 0.9rem;
       text-transform: uppercase;
@@ -101,14 +101,14 @@
     }
 
     .btn-outline {
-      background: var(--sage-light);
-      color: var(--text-dark);
-      border: 2px solid var(--text-dark);
+      background: rgba(255,255,255,0.15);
+      color: var(--white);
+      border: 2px solid var(--white);
     }
 
     .btn-outline:hover {
-      background: var(--text-dark);
-      color: var(--white);
+      background: var(--white);
+      color: var(--sage-dark);
     }
 
     .btn-primary {
@@ -165,7 +165,7 @@
     .hero-text p {
       font-size: 1.15rem;
       line-height: 1.7;
-      color: var(--text-dark);
+      color: rgba(255,255,255,0.85);
       max-width: 500px;
       margin-bottom: 2rem;
     }
@@ -194,22 +194,29 @@
     .nav-email-input {
       padding: 0.65rem 1rem;
       border-radius: 50px;
-      border: 2px solid var(--text-dark);
-      background: rgba(255,255,255,0.3);
+      border: 2px solid rgba(255,255,255,0.6);
+      background: rgba(255,255,255,0.15);
       font-family: 'Inter', sans-serif;
       font-size: 0.85rem;
+      color: var(--white);
       outline: none;
       width: 200px;
       transition: all 0.3s;
     }
 
     .nav-email-input:focus {
-      background: var(--white);
+      background: rgba(255,255,255,0.95);
+      color: var(--text-dark);
+      border-color: var(--white);
       width: 240px;
     }
 
     .nav-email-input::placeholder {
-      color: rgba(26,26,26,0.5);
+      color: rgba(255,255,255,0.6);
+    }
+
+    .nav-email-input:focus::placeholder {
+      color: rgba(0,0,0,0.4);
     }
 
     /* CTA EMAIL FORM */
@@ -359,7 +366,7 @@
       height: 56px;
       border-radius: 50%;
       background: var(--sage);
-      color: var(--text-dark);
+      color: var(--white);
       font-family: 'Playfair Display', serif;
       font-weight: 900;
       font-size: 1.5rem;
@@ -409,7 +416,7 @@
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 500;
-      color: var(--text-dark);
+      color: rgba(255,255,255,0.75);
     }
 
     /* CTA */
