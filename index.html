@@ -176,32 +176,70 @@
       object-fit: cover;
     }
 
-    .hero-arrows {
-      position: absolute;
-      bottom: 3rem;
-      left: 3rem;
-      display: flex;
-      gap: 1rem;
-    }
-
-    .arrow-btn {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--sage-light);
-      border: none;
+    /* NAV EMAIL FORM */
+    .nav-email-form {
       display: flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-size: 1.25rem;
-      color: var(--text-dark);
+      gap: 0.5rem;
     }
 
-    .arrow-btn:hover {
+    .nav-email-input {
+      padding: 0.65rem 1rem;
+      border-radius: 50px;
+      border: 2px solid var(--text-dark);
+      background: rgba(255,255,255,0.3);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+      width: 200px;
+      transition: all 0.3s;
+    }
+
+    .nav-email-input:focus {
       background: var(--white);
-      transform: scale(1.1);
+      width: 240px;
+    }
+
+    .nav-email-input::placeholder {
+      color: rgba(26,26,26,0.5);
+    }
+
+    /* CTA EMAIL FORM */
+    .cta-email-form {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .email-form-row {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    .cta-email-input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border-radius: 50px;
+      border: 2px solid rgba(0,0,0,0.1);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .cta-email-input:focus {
+      border-color: var(--ocean);
+      box-shadow: 0 0 0 3px rgba(26, 92, 94, 0.15);
+    }
+
+    .cta-email-input::placeholder {
+      color: #999;
+    }
+
+    .form-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #999;
     }
 
     /* BENEFITS */
@@ -432,6 +470,8 @@
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
+      .nav-email-input { width: 140px; }
+      .nav-email-input:focus { width: 160px; }
 
       .hero { padding: 7rem 1.5rem 3rem; }
       .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -452,6 +492,9 @@
     @media (max-width: 500px) {
       .steps-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
+      .email-form-row { flex-direction: column; }
+      .nav-email-form { flex-direction: column; gap: 0.5rem; }
+      .nav-email-input, .nav-email-input:focus { width: 100%; }
     }
   </style>
 </head>
@@ -466,7 +509,10 @@
         <li><a href="#how">How It Works</a></li>
         <li><a href="#start">Get Started</a></li>
       </ul>
-      <a href="#start" class="btn btn-outline">Get in Touch</a>
+      <form class="nav-email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input type="email" name="email" placeholder="Your email" required class="nav-email-input">
+        <button type="submit" class="btn btn-outline">Subscribe</button>
+      </form>
     </div>
   </nav>
 
@@ -474,17 +520,13 @@
   <section class="hero">
     <div class="hero-grid">
       <div class="hero-image">
-        <img src="https://images.unsplash.com/photo-1530053969600-caed2596d242?w=900&q=80" alt="Seaweed growing in clear ocean water">
+        <img src="https://images.unsplash.com/photo-1545671913-b89ac1b4ac10?w=900&q=80" alt="Underwater kelp forest with sunlight filtering through">
       </div>
       <div class="hero-text">
         <h1>Grow the Ocean's Future</h1>
         <p>Seaweed farming is the fastest-growing sector in aquaculture. Low cost, zero freshwater, zero fertilizer — and a massive positive impact on the planet. Start your ocean farm today.</p>
         <a href="#how" class="btn btn-primary">Learn How to Start</a>
       </div>
-    </div>
-    <div class="hero-arrows">
-      <button class="arrow-btn" aria-label="Previous">&larr;</button>
-      <button class="arrow-btn" aria-label="Next">&rarr;</button>
     </div>
   </section>
 
@@ -586,10 +628,13 @@
   <section class="cta" id="start">
     <h2>Ready to Start Your Seaweed Farm?</h2>
     <p>Join the growing community of ocean farmers building a sustainable future. We'll help you every step of the way.</p>
-    <div class="cta-buttons">
-      <a href="mailto:hello@seaweedfarmer.com" class="btn btn-primary">Get in Touch</a>
-      <a href="#how" class="btn btn-outline">Learn More</a>
-    </div>
+    <form class="cta-email-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="email-form-row">
+        <input type="email" name="email" placeholder="Enter your email address" required class="cta-email-input">
+        <button type="submit" class="btn btn-primary">Get Started</button>
+      </div>
+      <p class="form-note">Join 2,000+ aspiring ocean farmers. No spam, ever.</p>
+    </form>
   </section>
 
   <!-- FOOTER -->
