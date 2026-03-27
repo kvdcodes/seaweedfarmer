@@ -653,6 +653,36 @@
   </section>
 
   <!-- FOOTER -->
+  <script>
+    document.querySelectorAll('form').forEach(function(form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var data = new FormData(form);
+        var btn = form.querySelector('button[type="submit"]');
+        var originalText = btn.textContent;
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(function(response) {
+          if (response.ok) {
+            btn.textContent = 'Subscribed!';
+            form.querySelector('input[type="email"]').value = '';
+            setTimeout(function() { btn.textContent = originalText; btn.disabled = false; }, 3000);
+          } else {
+            btn.textContent = 'Error — try again';
+            btn.disabled = false;
+          }
+        }).catch(function() {
+          btn.textContent = 'Error — try again';
+          btn.disabled = false;
+        });
+      });
+    });
+  </script>
+
   <footer>
     <a href="#" class="logo">Seaweed Farmer</a>
     <ul class="footer-links">
